@@ -1,0 +1,1540 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{LeastSquaresAssumptionsSolutions}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} notebook
+\end{Verbatim}
+
+
+    \section{\# The Assumptions of Least
+Squares}\label{the-assumptions-of-least-squares}
+
+\paragraph{Version 0.1}\label{version-0.1}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+By AA Miller 2018 Nov 04
+
+    Today we will focus on a relatively simple problem, while highlighting
+several challenges for the standard astronomical workflow, as a way of
+setting up the various lectures that will happen over the course of this
+week.
+
+A lot of the lessons in this lecture are inspired by the paper
+\href{https://arxiv.org/abs/1008.4686}{Data Analysis Recipes: Fitting a
+Model to Data} by Hogg, Bovy, \& Lang. {[}This paper has been mentioned
+previously in the DSFP, though today we will only be able to scratch the
+surface of its content.{]}
+
+    In some sense - the goal right now is to make you really nervous about
+the work that you've previously done.
+
+(Though this lecture should not be met with too much consternation ----
+we will discuss new approaches to fitting a line)
+
+    \subsection{Problem 1) Data}\label{problem-1-data}
+
+At the core of everything we hope to accomplish with the DSFP stands a
+single common connection: data.
+
+    There are many things we (may) want to do with these data: reduce them,
+visualize them, model them, develop predictions from them, use them to
+infer fundamental properties of the universe (!).
+
+    Before we dive into that really fun stuff, we should start with some
+basics:
+
+    \textbf{Problem 1a}
+
+What is data?
+
+    \emph{Take a few min to discuss this with your partner}
+
+    \textbf{Solution 1a}
+
+While we just discussed several different ideas about the nature of
+data, the main thing I want to emphasize is the following: data are
+\emph{constants}.
+
+    \textbf{Problem 1b}
+
+Below, I provide some data (in the form of \texttt{numpy} arrays). As
+good data scientists, what is the first thing you should do with this
+data?
+
+Feel free to create a new cell if necessary.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{203}\PY{p}{,} \PY{l+m+mi}{58}\PY{p}{,} \PY{l+m+mi}{210}\PY{p}{,} \PY{l+m+mi}{202}\PY{p}{,} \PY{l+m+mi}{198}\PY{p}{,} \PY{l+m+mi}{158}\PY{p}{,} 
+                      \PY{l+m+mi}{165}\PY{p}{,} \PY{l+m+mi}{201}\PY{p}{,} \PY{l+m+mi}{157}\PY{p}{,} \PY{l+m+mi}{131}\PY{p}{,} \PY{l+m+mi}{166}\PY{p}{,} \PY{l+m+mi}{160}\PY{p}{,} 
+                      \PY{l+m+mi}{186}\PY{p}{,} \PY{l+m+mi}{125}\PY{p}{,} \PY{l+m+mi}{218}\PY{p}{,} \PY{l+m+mi}{146}\PY{p}{]}\PY{p}{)}
+        \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{495}\PY{p}{,} \PY{l+m+mi}{173}\PY{p}{,} \PY{l+m+mi}{479}\PY{p}{,} \PY{l+m+mi}{504}\PY{p}{,} \PY{l+m+mi}{510}\PY{p}{,} \PY{l+m+mi}{416}\PY{p}{,} 
+                      \PY{l+m+mi}{393}\PY{p}{,} \PY{l+m+mi}{442}\PY{p}{,} \PY{l+m+mi}{317}\PY{p}{,} \PY{l+m+mi}{311}\PY{p}{,} \PY{l+m+mi}{400}\PY{p}{,} \PY{l+m+mi}{337}\PY{p}{,} 
+                      \PY{l+m+mi}{423}\PY{p}{,} \PY{l+m+mi}{334}\PY{p}{,} \PY{l+m+mi}{533}\PY{p}{,} \PY{l+m+mi}{344}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \textbf{Solution 1b}
+
+I intentionally mislead with the previous question.
+
+The most important thing to do with \emph{any} new data is understand
+where the data came from and what they represent. While the data are
+constants, they represent measurements of some kind. Thus, I would argue
+the most important thing to do with this data is understand where they
+came from (others may disagree).
+
+    For the 2 arrays created above, the answer is that they are "toy" data
+that were generated for illustrative purposes in the Hogg, Bovy, \& Lang
+paper. In that sense, there are no units or specific measurements that
+otherwise need to be understood.
+
+    \textbf{Problem 1c}
+
+{[}You may have already done this{]} Now that we understand the origin
+of the data, make a scatter plot showing their distribution.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} Text(0,0.5,'y')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Probelm 2) Fitting a Line to
+Data}\label{probelm-2-fitting-a-line-to-data}
+
+There is a very good chance, though I am not specifically assuming
+anything, that upon making the previous plot you had a thought along the
+lines of "these points fall on a line" or "these data represent a linear
+relationship."
+
+    \textbf{Problem 2a}
+
+Is the assumption of linearity valid for the above data?
+
+Is it convenient?
+
+    \emph{Take a few min to discuss this with your partner}
+
+    \textbf{Solution 2a}
+
+One of the primary lessons from this lecture is the following:
+\emph{assumptions are dangerous}! In general, a linear relationship
+between data should only be assumed if there is a very strong
+theoretical motivation for such a relationship. Otherwise, the
+relationship could be just about anything, and inference based on an
+assumption of linearity may lead to dramatically incorrect conclusions
+(Friday's talk by Adam will cover Model Selection).
+
+That being said, assuming the data represent (are drawn) from a linear
+relationship is often very convenient. There are a large host of tools
+designed to solve this very problem.
+
+    Let us proceed with convenience and assume the data represent a linear
+relationship. In that case, in order to make predictions for future
+observations, we need to fit a line to the data.
+
+The "standard" proceedure for doing so is
+\href{https://en.wikipedia.org/wiki/Least_squares}{least-squares
+fitting}. In brief, least-squares minimizes the sum of the squared value
+of the residuals between the data and the fitting function.
+
+    I've often joked that all you need to be a good data scientist is
+\href{https://www.google.com}{google} and
+\href{https://stackoverflow.com}{stack overflow}. Via those two tools,
+we can quickly deduce that the easiest way to perform a linear
+least-squares fit to the above data is with
+\href{https://docs.scipy.org/doc/numpy/reference/generated/numpy.polyfit.html}{\texttt{np.polyfit}},
+which performs a least-squares polynomial fit to two \texttt{numpy}
+arrays.
+
+    \textbf{Problem 2b}
+
+Use \texttt{np.polyfit()} to fit a line to the data. Overplot the
+best-fit line on the data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{p} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{p\PYZus{}eval} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{poly1d}\PY{p}{(}\PY{n}{p}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{600}\PY{p}{]}\PY{p}{,} \PY{n}{p\PYZus{}eval}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{600}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} Text(0,0.5,'y')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    There is a very good chance, though, again, I am not specifically
+assuming anything, that for the previous plots that you plotted
+\texttt{x} along the abscissa and \texttt{y} along the ordinate.
+
+{[}Honestly, there's no one to blame if this is the case, this has
+essentially been drilled into all of us from the moment we started
+making plots. In fact, in \texttt{matplotlib} we cannot change the name
+of the abscissa label without adjusting the \texttt{xlabel}.{]}
+
+    This leads us to an important question, however. What if \texttt{y} does
+not depend on \texttt{x} and instead \texttt{x} depends on \texttt{y}?
+Does that in any way change the results for the fit?
+
+    \textbf{Problem 2c}
+
+Perform a linear least-squares fit to \texttt{x} vs. \texttt{y} (or if
+you already fit this, then reverse the axes). As above, plot the data
+and the best-fit model.
+
+To test if the relation is the same between the two fits, compare the
+predicted \texttt{y} value for both models corresponding to
+\texttt{x\ =\ 50}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{p\PYZus{}yx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{p\PYZus{}yx\PYZus{}eval} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{poly1d}\PY{p}{(}\PY{n}{p\PYZus{}yx}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{y}\PY{p}{,}\PY{n}{x}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{250}\PY{p}{]}\PY{p}{,} \PY{n}{p\PYZus{}yx\PYZus{}eval}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{250}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{For y vs. x, then x=50 would predict y=}\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{p\PYZus{}eval}\PY{p}{(}\PY{l+m+mi}{50}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{For x vs. y, then x=50 would predict y=}\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{50} \PY{o}{\PYZhy{}} \PY{n}{p\PYZus{}yx}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n}{p\PYZus{}yx}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+For y vs. x, then x=50 would predict y=24.80
+For x vs. y, then x=50 would predict y=9.54
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    So we have now uncovered one of the peculiariaties of least-squares.
+Fitting \texttt{y} vs. \texttt{x} is \emph{not} the same as fitting
+\texttt{x} vs. \texttt{y}.
+
+    There are a couple essential assumptions that go into standard
+least-squares fitting:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  There is one dimension along which the data have negligible
+  uncertainties
+\item
+  Along the other dimension \textbf{all} of the uncertainties can be
+  described via Gaussians of known variance
+\end{enumerate}
+
+These two conditions are \emph{rarely} met for astronomical data. While
+condition 1 can be satisfied (e.g., time series data where there is
+essentially no uncertainty on the time of the observations), I contend
+that condition 2 is rarely, if ever, satisfied.
+
+    Speaking of uncertainties(1), we have not utilized any thus far. {[}I
+hope this has raised some warning bells.{]}
+
+We will now re-organize our data to match what is originally in Hogg,
+Bovy, \& Lang (previously \texttt{x} and \texttt{y} were swapped).
+
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\tightlist
+\item
+  There is an amazing footnote in Hogg, Bovy, \& Lang about "errors" vs.
+  "uncertainties" - I suggest everyone read this.
+\end{enumerate}
+
+    \textbf{Problem 2d}
+
+Re-plot the data including the uncertatines.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{203}\PY{p}{,} \PY{l+m+mi}{58}\PY{p}{,} \PY{l+m+mi}{210}\PY{p}{,} \PY{l+m+mi}{202}\PY{p}{,} \PY{l+m+mi}{198}\PY{p}{,} \PY{l+m+mi}{158}\PY{p}{,} 
+                      \PY{l+m+mi}{165}\PY{p}{,} \PY{l+m+mi}{201}\PY{p}{,} \PY{l+m+mi}{157}\PY{p}{,} \PY{l+m+mi}{131}\PY{p}{,} \PY{l+m+mi}{166}\PY{p}{,} \PY{l+m+mi}{160}\PY{p}{,} 
+                      \PY{l+m+mi}{186}\PY{p}{,} \PY{l+m+mi}{125}\PY{p}{,} \PY{l+m+mi}{218}\PY{p}{,} \PY{l+m+mi}{146}\PY{p}{]}\PY{p}{)}
+        \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{495}\PY{p}{,} \PY{l+m+mi}{173}\PY{p}{,} \PY{l+m+mi}{479}\PY{p}{,} \PY{l+m+mi}{504}\PY{p}{,} \PY{l+m+mi}{510}\PY{p}{,} \PY{l+m+mi}{416}\PY{p}{,} 
+                      \PY{l+m+mi}{393}\PY{p}{,} \PY{l+m+mi}{442}\PY{p}{,} \PY{l+m+mi}{317}\PY{p}{,} \PY{l+m+mi}{311}\PY{p}{,} \PY{l+m+mi}{400}\PY{p}{,} \PY{l+m+mi}{337}\PY{p}{,} 
+                      \PY{l+m+mi}{423}\PY{p}{,} \PY{l+m+mi}{334}\PY{p}{,} \PY{l+m+mi}{533}\PY{p}{,} \PY{l+m+mi}{344}\PY{p}{]}\PY{p}{)}
+        \PY{n}{sigma\PYZus{}y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{21}\PY{p}{,} \PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{27}\PY{p}{,} \PY{l+m+mi}{14}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{,} 
+                            \PY{l+m+mi}{14}\PY{p}{,} \PY{l+m+mi}{25}\PY{p}{,} \PY{l+m+mi}{52}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{34}\PY{p}{,} \PY{l+m+mi}{31}\PY{p}{,} 
+                            \PY{l+m+mi}{42}\PY{p}{,} \PY{l+m+mi}{26}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{22}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{errorbar}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{sigma\PYZus{}y}\PY{p}{,} \PY{n}{fmt} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{o}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} <Container object of 3 artists>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We are now assuming that \texttt{x} has negligible uncertainties and
+that \texttt{y} has uncertainties that can be perfectly described by
+Gaussians of known variance.
+
+    A portion of the appeal of least-squares is that it provides a
+deterministic method for determining the best fit. To understand that we
+now need to do a little linear algebra.
+
+We can arrange the data in the following matricies:
+
+\[ \mathbf{Y} = \left[ {\begin{array}{c}
+            y_1 \\
+            y_2 \\
+            \dots \\
+            y_N
+            \end{array}
+           }
+            \right] , \]
+
+\[ \mathbf{A} = \left[ {\begin{array}{cc}
+            1 & x_1 \\
+            1 & x_2 \\
+            \dots & \dots \\
+            1 & x_N
+            \end{array}
+           }
+           \right] ,
+           \]
+
+\[ \mathbf{C} = \left[ {\begin{array}{cccc}
+            \sigma_{y_1}^2 & 0 & \dots & 0 \\
+            0 & \sigma_{y_2}^2 & \dots & 0 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \dots & \sigma_{y_1}^2 \\
+            \end{array}
+           }
+           \right] ,
+           \]
+
+where \(\mathbf{Y}\) is a vector, and \(\mathbf{C}\) is the covariance
+matrix.
+
+    Ultimately, we need to solve the equation
+
+\[\mathbf{Y} = \mathbf{A}\mathbf{X}.\]
+
+I am skipping the derivation, but the solution to this equations is:
+
+\[ \left[ {\begin{array}{c}
+            b \\
+            m \\
+            \end{array}
+           }
+            \right] = \mathbf{X} = \left[ \mathbf{A}^T \mathbf{C}^{-1} \mathbf{A}\right]^{-1} \left[ \mathbf{A}^T \mathbf{C}^{-1} \mathbf{Y}\right].\]
+
+    As noted in Hogg, Bovy, \& Lang, this procedure minimizes the \(\chi^2\)
+function, which is the total squared error, after appropriately scaling
+by the uncertainties:
+
+\[ \chi^2 = \Sigma_{i = 1}^{N} \frac{[y_i - f(x_i)]^2}{\sigma_{y_i}^2} = \left[ \mathbf{Y}  - \mathbf{A}\mathbf{X}\right]^{T} \mathbf{C}^{-1} \left[ \mathbf{Y} - \mathbf{A} \mathbf{X}\right].\]
+
+    \textbf{Problem 2e}
+
+Using the linear algebra equations above (i.e. avoid \texttt{np.polyfit}
+or any other similar functions), determine the weighted least-squares
+best-fit values for \(b\) and \(m\), the intercept and slope,
+respectively.
+
+Plot the results of the best-fit line. How does this compare to the
+above estimates?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{Y} \PY{o}{=} \PY{n}{y}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{A} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones\PYZus{}like}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+        \PY{n}{C} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{diag}\PY{p}{(}\PY{n}{sigma\PYZus{}y}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+        
+        \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{A}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}\PY{n+nd}{@np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{C}\PY{p}{)}\PY{n+nd}{@A}\PY{p}{)} \PY{o}{@} \PY{p}{(}\PY{n}{A}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}\PY{n+nd}{@np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{C}\PY{p}{)}\PY{n+nd}{@Y}\PY{p}{)}
+        
+        \PY{n}{best\PYZus{}fit} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{poly1d}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{errorbar}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{sigma\PYZus{}y}\PY{p}{,} \PY{n}{fmt} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{o}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{300}\PY{p}{]}\PY{p}{,} \PY{n}{best\PYZus{}fit}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{300}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The best\PYZhy{}fit value for the slope and intercept are: }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s2}{ and }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The best-fit value for the slope and intercept are: 2.2399 and 34.0477
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_38_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{Problem 2f}
+
+Confirm the results of this fit are the same as those from
+\texttt{np.polyfit}.
+
+\emph{Hint - be sure to include the uncertainties.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{p} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{w} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{/}\PY{n}{sigma\PYZus{}y}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The best\PYZhy{}fit value for the slope and intercept are: }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s2}{ and }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{p}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{p}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The best-fit value for the slope and intercept are: 2.2399 and 34.0477
+
+    \end{Verbatim}
+
+    \subsection{Problem 3) Are the Uncertainties Actually
+Gaussian?}\label{problem-3-are-the-uncertainties-actually-gaussian}
+
+Previously we noted that there are two essential assumptions that are
+required for least-squares fitting to be correct. We are now going to
+examine the latter requirement, namely, that the uncertainties can be
+perfectly described as Gaussians with known variance.
+
+    Earlier I stated this assumption is rarely satisfied. Why might this be
+the case?
+
+In my experience (meaning this is hardly universal), if it's astro, it's
+got systematics. While I cannot prove this, I contend that systematic
+uncertainties are rarely Gaussian. If you are lucky enough to be in a
+regime where you can be confident that the systematics are Gaussian, I
+further contend that it is extremely difficult to be certain that the
+variance of that Gaussian is known.
+
+    Then there's another (astro-specific) challenge: in many circumstances,
+we aren't actually working with data, but rather with the results of
+other models applied to the data.
+
+Let's take an optical astronomy (biased, but this is LSST after all)
+example. What are the data? In many cases inference is being based on
+measurements of brightness, but the true data in this case is simply a
+bunch of electron counts in a CCD. The brightness (or mag) is based on
+the application of a model (e.g., PSF, aperture, Kron) that is applied
+to the data. Thus, to assume that a flux (or mag) measurement has
+Gaussian uncertainties with known variance is to assume that whatever
+flux-measurement model has been applied always produces perfectly
+Gaussian uncertainties (and a lot of different assumptions go into
+flux-measurement models...)
+
+    As a demonstration associated with the challenges of these assumptions,
+we will examine the data set presented in Hogg, Bovy, \& Lang.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{201}\PY{p}{,} \PY{l+m+mi}{201}\PY{p}{,} \PY{l+m+mi}{287}\PY{p}{,} \PY{l+m+mi}{166}\PY{p}{,}  \PY{l+m+mi}{58}\PY{p}{,} \PY{l+m+mi}{157}\PY{p}{,} \PY{l+m+mi}{146}\PY{p}{,} \PY{l+m+mi}{218}\PY{p}{,} \PY{l+m+mi}{203}\PY{p}{,} \PY{l+m+mi}{186}\PY{p}{,} \PY{l+m+mi}{160}\PY{p}{,}  \PY{l+m+mi}{47}\PY{p}{,} \PY{l+m+mi}{210}\PY{p}{,}
+                \PY{l+m+mi}{131}\PY{p}{,} \PY{l+m+mi}{202}\PY{p}{,} \PY{l+m+mi}{125}\PY{p}{,} \PY{l+m+mi}{158}\PY{p}{,} \PY{l+m+mi}{198}\PY{p}{,} \PY{l+m+mi}{165}\PY{p}{,} \PY{l+m+mi}{244}\PY{p}{]}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{592}\PY{p}{,} \PY{l+m+mi}{442}\PY{p}{,} \PY{l+m+mi}{402}\PY{p}{,} \PY{l+m+mi}{400}\PY{p}{,} \PY{l+m+mi}{173}\PY{p}{,} \PY{l+m+mi}{317}\PY{p}{,} \PY{l+m+mi}{344}\PY{p}{,} \PY{l+m+mi}{533}\PY{p}{,} \PY{l+m+mi}{495}\PY{p}{,} \PY{l+m+mi}{423}\PY{p}{,} \PY{l+m+mi}{337}\PY{p}{,} \PY{l+m+mi}{583}\PY{p}{,} \PY{l+m+mi}{479}\PY{p}{,}
+                \PY{l+m+mi}{311}\PY{p}{,} \PY{l+m+mi}{504}\PY{p}{,} \PY{l+m+mi}{334}\PY{p}{,} \PY{l+m+mi}{416}\PY{p}{,} \PY{l+m+mi}{510}\PY{p}{,} \PY{l+m+mi}{393}\PY{p}{,} \PY{l+m+mi}{401}\PY{p}{]}\PY{p}{)}
+         \PY{n}{sigma\PYZus{}y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{61}\PY{p}{,} \PY{l+m+mi}{25}\PY{p}{,} \PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{34}\PY{p}{,} \PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{52}\PY{p}{,} \PY{l+m+mi}{22}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{21}\PY{p}{,} \PY{l+m+mi}{42}\PY{p}{,} \PY{l+m+mi}{31}\PY{p}{,} \PY{l+m+mi}{38}\PY{p}{,} \PY{l+m+mi}{27}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{14}\PY{p}{,} \PY{l+m+mi}{26}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{,}
+                \PY{l+m+mi}{30}\PY{p}{,} \PY{l+m+mi}{14}\PY{p}{,} \PY{l+m+mi}{25}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \textbf{Problem 3a}
+
+Using the least-squares methodology developed in Problem 2, determine
+the best-fit slope and intercept for a line fit to the data above.
+
+Make a scatter plot of the data, and overplot the best-fit line. What if
+anything, do you notice about the data and the fit?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{Y} \PY{o}{=} \PY{n}{y}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{A} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones\PYZus{}like}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+         \PY{n}{C} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{diag}\PY{p}{(}\PY{n}{sigma\PYZus{}y}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{A}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}\PY{n+nd}{@np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{C}\PY{p}{)}\PY{n+nd}{@A}\PY{p}{)} \PY{o}{@} \PY{p}{(}\PY{n}{A}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}\PY{n+nd}{@np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{C}\PY{p}{)}\PY{n+nd}{@Y}\PY{p}{)}
+         
+         \PY{n}{best\PYZus{}fit} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{poly1d}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{errorbar}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{sigma\PYZus{}y}\PY{p}{,} \PY{n}{fmt} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{o}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{300}\PY{p}{]}\PY{p}{,} \PY{n}{best\PYZus{}fit}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{300}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The best\PYZhy{}fit value for the slope and intercept are: }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s2}{ and }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The best-fit value for the slope and intercept are: 1.0767 and 213.2735
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_47_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Unlike the data in Problems 1 and 2, there appear to be some significant
+outliers (of course - this appearance of outliers is entirely dependent
+upon the assumption of linearity, there may actually be no outliers and
+a complex relation between \texttt{x} and \texttt{y}). As such, it does
+not appear (to me) as though the best-fit line provides a good model for
+the data.
+
+    \textbf{Problem 3b}
+
+Perform a least-squares 2nd order polynomial fit to the data. Overplot
+the bestfit curve.
+
+How does this compare to the linear model fit?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{Y} \PY{o}{=} \PY{n}{y}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{A} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones\PYZus{}like}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+         \PY{n}{C} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{diag}\PY{p}{(}\PY{n}{sigma\PYZus{}y}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{A}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}\PY{n+nd}{@np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{C}\PY{p}{)}\PY{n+nd}{@A}\PY{p}{)} \PY{o}{@} \PY{p}{(}\PY{n}{A}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}\PY{n+nd}{@np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{C}\PY{p}{)}\PY{n+nd}{@Y}\PY{p}{)}
+         
+         \PY{n}{best\PYZus{}fit} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{poly1d}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{errorbar}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{sigma\PYZus{}y}\PY{p}{,} \PY{n}{fmt} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{o}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{300}\PY{p}{,}\PY{l+m+mi}{300}\PY{p}{)}\PY{p}{,} \PY{n}{best\PYZus{}fit}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{300}\PY{p}{,}\PY{l+m+mi}{300}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} [<matplotlib.lines.Line2D at 0x11c587a20>]
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    By eye (a metric that is hardly meaningful, but nevertheless worth
+developing because talks never provide all of the details), the
+quadratic fit appears "better" than the linear fit.
+
+But, there are still "outliers" and in the realm of polynomial fitting,
+it is always possible to get a better fit by adding more degrees to the
+polynomial. Should we keep going here, or should we stop? (Again - we
+will discuss model selection with Adam on Friday)
+
+{[}As a reminder - in machine learning we'd call this low training
+error, but the generalization error is likely huge{]}
+
+    How should we deal with these potential outliers?
+
+(and to re-iterate, we cannot be certain that these points are, in fact,
+outliers)
+
+    Amazingly, if you scroll through the literature you can find solutions
+like the following: "We do not \emph{believe} the data point at (x, y)
+for reasons A, B, C. Thus, we exclude that point from the fit."
+
+This, obviously, lacks any sort of rigor. If data is going to be
+removed, and it is worth asking if data should ever be removed, it
+should not be subject to the "beliefs" of an individual person or group.
+
+    A more common approach that you might encounter is known as \(k\sigma\)
+clipping, which is an iterative procedure to identify and remove
+outliers from a data set. The procedure is as follows:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Fit the model to the data
+\item
+  Identify any data points that are \(k\sigma\) discrepant from the
+  best-fit model
+\item
+  Remove the discrepant points, repeat steps 1 \& 2 until there are no
+  data beyond \(k\sigma\)
+\end{enumerate}
+
+    The motivation for this procedure is the following: in a small data set
+(such as the one above, 20 points), the likelihood of having large
+\(\sigma\) deviations (let's say \(k = 5\)) is vanishingly small. Thus,
+it "makes sense" to remove those points.
+
+Of course, this only makes sense if the uncertainties are truly gaussian
+with low variance. So again, specific, and likely untrue, assumptions
+have to be made.
+
+    \textbf{Problem 3c}
+
+Develop a \(k\sigma\) clipping procedure to fit a line to the data set.
+Set \(k = 5\) and determine the best-fit line to the data.
+
+Overplot the results of the procedure on the data. How does this fit to
+the data look?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k}{def} \PY{n+nf}{k\PYZus{}clip\PYZus{}linear\PYZus{}fit}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{sigma\PYZus{}y}\PY{p}{,} \PY{n}{k} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}Fit a line to y vs. x, and k\PYZhy{}sigma clip until convergence\PYZsq{}\PYZsq{}\PYZsq{}}
+             
+             \PY{n}{not\PYZus{}clipped} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones\PYZus{}like}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{bool}\PY{p}{)}
+             \PY{n}{n\PYZus{}remove} \PY{o}{=} \PY{l+m+mi}{1}
+             \PY{k}{while} \PY{n}{n\PYZus{}remove} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{Y} \PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{n}{not\PYZus{}clipped}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n}{A} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones\PYZus{}like}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{not\PYZus{}clipped}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{x}\PY{p}{[}\PY{n}{not\PYZus{}clipped}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+                 \PY{n}{C} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{diag}\PY{p}{(}\PY{n}{sigma\PYZus{}y}\PY{p}{[}\PY{n}{not\PYZus{}clipped}\PY{p}{]}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+         
+                 \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{A}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}\PY{n+nd}{@np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{C}\PY{p}{)}\PY{n+nd}{@A}\PY{p}{)} \PY{o}{@} \PY{p}{(}\PY{n}{A}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}\PY{n+nd}{@np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{C}\PY{p}{)}\PY{n+nd}{@Y}\PY{p}{)}
+         
+                 \PY{n}{best\PYZus{}fit} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{poly1d}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{norm\PYZus{}res} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{best\PYZus{}fit}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{sigma\PYZus{}y}\PY{p}{)}
+                 \PY{n}{remove} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{logical\PYZus{}and}\PY{p}{(}\PY{n}{norm\PYZus{}res} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{k}\PY{p}{,} \PY{n}{not\PYZus{}clipped} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n}{n\PYZus{}remove} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{remove}\PY{p}{)}
+                 \PY{n}{not\PYZus{}clipped}\PY{p}{[}\PY{n}{remove}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}   
+                 
+             \PY{k}{return} \PY{n}{X}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{not\PYZus{}clipped}
+         
+         \PY{n}{m}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{not\PYZus{}clipped} \PY{o}{=} \PY{n}{k\PYZus{}clip\PYZus{}linear\PYZus{}fit}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{sigma\PYZus{}y}\PY{p}{,} \PY{n}{k} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{errorbar}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{not\PYZus{}clipped}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{[}\PY{n}{not\PYZus{}clipped}\PY{p}{]}\PY{p}{,} 
+                      \PY{n}{sigma\PYZus{}y}\PY{p}{[}\PY{n}{not\PYZus{}clipped}\PY{p}{]}\PY{p}{,} \PY{n}{fmt} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{o}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{good}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{errorbar}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{not\PYZus{}clipped} \PY{o}{==} \PY{k+kc}{False}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{[}\PY{n}{not\PYZus{}clipped} \PY{o}{==} \PY{k+kc}{False}\PY{p}{]}\PY{p}{,} 
+                      \PY{n}{sigma\PYZus{}y}\PY{p}{[}\PY{n}{not\PYZus{}clipped} \PY{o}{==} \PY{k+kc}{False}\PY{p}{]}\PY{p}{,} \PY{n}{fmt} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{o}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{outlier}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{p} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{poly1d}\PY{p}{(}\PY{p}{[} \PY{n}{m}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{b}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{300}\PY{p}{]}\PY{p}{,} \PY{n}{p}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{300}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}4}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{sigma }\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{; }\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{mathrm}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{best }\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{; fit\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<IPython.core.display.Javascript object>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} [<matplotlib.lines.Line2D at 0x119153a58>]
+\end{Verbatim}
+            
+    By eye, the results above are not that satisfying. Several of those
+points do look like outliers, but there are also 2 points being rejected
+that are well within the other cluster of data.
+
+Furthermore, the point at \((x, y) \approx (60, 170)\) was clipped in an
+early iteration of the algorithm, but now with the final model this
+point is actually within \(k\sigma\) of the best-fit line. What should
+one do with points like this?
+
+    This is one of the great problems with \(k\sigma\) clipping: how does
+one select the appropriate value for \(k\)?
+
+Even if there was a good heuristic argument for selecting \(k\), is
+there fundamentally any difference between an observation that is
+\(k\sigma + \epsilon\) away from the model versus a point at
+\(k\sigma - \epsilon\), where \(\epsilon \ll 1\)? Any choice of \(k\)
+will automatically remove one of these points and not the other, which
+seems somewhat arbitrary...
+
+    \textbf{Problem 3d}
+
+Perform the \(k\sigma\) procedure on the data, but this time set
+\(k = 7\). Plot the results as above.
+
+How do these results compare to our previous fits?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{m}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{not\PYZus{}clipped} \PY{o}{=} \PY{n}{k\PYZus{}clip\PYZus{}linear\PYZus{}fit}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{sigma\PYZus{}y}\PY{p}{,} \PY{n}{k} \PY{o}{=} \PY{l+m+mi}{7}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{errorbar}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{not\PYZus{}clipped}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{[}\PY{n}{not\PYZus{}clipped}\PY{p}{]}\PY{p}{,} 
+                      \PY{n}{sigma\PYZus{}y}\PY{p}{[}\PY{n}{not\PYZus{}clipped}\PY{p}{]}\PY{p}{,} \PY{n}{fmt} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{o}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{good}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{errorbar}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{not\PYZus{}clipped} \PY{o}{==} \PY{k+kc}{False}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{[}\PY{n}{not\PYZus{}clipped} \PY{o}{==} \PY{k+kc}{False}\PY{p}{]}\PY{p}{,} 
+                      \PY{n}{sigma\PYZus{}y}\PY{p}{[}\PY{n}{not\PYZus{}clipped} \PY{o}{==} \PY{k+kc}{False}\PY{p}{]}\PY{p}{,} \PY{n}{fmt} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{o}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{outlier}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{p} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{poly1d}\PY{p}{(}\PY{p}{[} \PY{n}{m}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{b}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{300}\PY{p}{]}\PY{p}{,} \PY{n}{p}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{300}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}4}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{sigma }\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{; }\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{mathrm}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{best }\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{; fit\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<IPython.core.display.Javascript object>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} [<matplotlib.lines.Line2D at 0x116d28f28>]
+\end{Verbatim}
+            
+    By eye, this \emph{appears} superior to the previous fit. At the same
+time, we have not actually optimized anything to definitively show that
+this is the case.
+
+If there are outliers in the data, then it stands to reason that the
+uncertainties are likely not correctly estimated.
+
+    \textbf{Problem 3e}
+
+Perform the \(k\sigma\) procedure on the data, with \(k = 5\), but the
+variance increased by a factor 4 (i.e. \texttt{sigma\_y} increased by a
+factor of 2). Plot the results as above.
+
+How do these results compare to our previous fits?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{m}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{not\PYZus{}clipped} \PY{o}{=} \PY{n}{k\PYZus{}clip\PYZus{}linear\PYZus{}fit}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{sigma\PYZus{}y}\PY{p}{,} \PY{n}{k} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{errorbar}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{not\PYZus{}clipped}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{[}\PY{n}{not\PYZus{}clipped}\PY{p}{]}\PY{p}{,} 
+                      \PY{n}{sigma\PYZus{}y}\PY{p}{[}\PY{n}{not\PYZus{}clipped}\PY{p}{]}\PY{p}{,} \PY{n}{fmt} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{o}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{good}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{errorbar}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{not\PYZus{}clipped} \PY{o}{==} \PY{k+kc}{False}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{[}\PY{n}{not\PYZus{}clipped} \PY{o}{==} \PY{k+kc}{False}\PY{p}{]}\PY{p}{,} 
+                      \PY{n}{sigma\PYZus{}y}\PY{p}{[}\PY{n}{not\PYZus{}clipped} \PY{o}{==} \PY{k+kc}{False}\PY{p}{]}\PY{p}{,} \PY{n}{fmt} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{o}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{outlier}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{p} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{poly1d}\PY{p}{(}\PY{p}{[} \PY{n}{m}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{b}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{300}\PY{p}{]}\PY{p}{,} \PY{n}{p}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{300}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}4}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{sigma }\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{; }\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{mathrm}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{best }\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{; fit\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<IPython.core.display.Javascript object>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} [<matplotlib.lines.Line2D at 0x11590efd0>]
+\end{Verbatim}
+            
+    If the uncertainties were underestimated then none of the data get
+clipped from the fit!
+
+    I assume (and I hope I've convinced you that assumptions are dangerous)
+that if you have worked with astronomical data that at one point or
+another you have (i) encountered data that appear to have outliers,
+and/or (ii) plotted data in 2 dimensions and then performed a
+(least-squares) linear fit to that data.
+
+    If that is true, I sincerely hope you have the following two thoughts:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Crap, crap, crap - I really messed up my paper on
+  {[}\emph{REDACTED}{]}.
+\item
+  There has to be a better way!
+\end{enumerate}
+
+    First, let's address point 1. Don't freak out. Yes, it is probably the
+case that some work somewhere was not completed in the absolute most
+rigorous fashion possible. This is okay (and I feel fairly confident
+saying everyone has done it. There are definitely examples of each of
+the "bad" things described above in \emph{my} papers if you go back and
+look hard enough.)
+
+There are even some situations where the above prescriptions are
+appropriate and preferred (think engineering solutions as opposed to
+strict scientific inference).
+
+    More importantly - point 2: there is a better way. Especially for the
+data/problem that we have been investigating above.
+
+We can approach this problem as a Bayesian.
+
+    \subsection{Bayes' Theorem}\label{bayes-theorem}
+
+We do not have enough time for a full lecture on Bayes' Theorem, but we
+will provide a (way too) short description, while defining some key
+terms.
+
+We start with a quick derivation (Bayes' Theorem is all about
+conditional probabilities):
+
+    \[ P(X|Y) = \frac{P(X \cap Y)}{P(Y)} \\
+P(Y|X) = \frac{P(Y \cap X)}{P(X)} \\
+\cdots \\
+P(X|Y) = \frac{P(Y|X) P(X)}{P(Y)} \]
+
+    This is Bayes' Theorem.
+
+\(P(X|Y)\) is the \textbf{posterior}. This is the probability of the
+model parameters, \(X\), given the observations \(Y\). This is the
+quantity that we ultimately want to compute.
+
+\(P(Y|X)\) is the \textbf{likelihood}. This is the same as the
+likelihood that we did computed above.
+
+\(P(X)\) is the \textbf{prior}. This is the probability of the model
+parameters, and it encompases everything you believe about the model
+prior to running the experiment. The use of a prior is what makes the
+analysis Bayesian.
+
+\(P(Y)\) is the \textbf{probability of data}, or as David Hogg says,
+"the fully marginalized likelihood (FML)". This is extremely hard to
+calculate (though it is possible), and often is ignored as it is just a
+normalization factor.
+
+    Thus, \(P(X|Y) \propto P(Y|X) P(X)\), and for many astronomical
+applications we look to sample from the posterior while ignoring the
+probability of the data (ignoring the normalization factor means that
+model comparison is very difficult, though there are ways to do this and
+we will cover them in great detail in the future).
+
+    \subsection{Challenge Problem}\label{challenge-problem}
+
+Take a Bayesian approach to the above problem, whereby you define a
+generative model that allows you to compute the likelihood of the
+observations. The computation of the likelihood or posterior probability
+distribution requires complex integrals, compute these integrals using
+your favorite Markov Chain Monte Carlo techniques.
+
+The combination of each of these tools provides a far more satisfying
+result than the various procedures previously discussed in this lecture.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k}{def} \PY{n+nf}{lnlike}\PY{p}{(}\PY{n}{theta}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{sigma\PYZus{}y}\PY{p}{)}\PY{p}{:}
+             \PY{n}{m}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{p\PYZus{}b}\PY{p}{,} \PY{n}{lnv\PYZus{}b}\PY{p}{,} \PY{n}{y\PYZus{}b} \PY{o}{=} \PY{n}{theta}
+             \PY{n}{model} \PY{o}{=} \PY{n}{m} \PY{o}{*} \PY{n}{x} \PY{o}{+} \PY{n}{b}
+             \PY{n}{bad\PYZus{}noise} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{lnv\PYZus{}b}\PY{p}{)} \PY{o}{+} \PY{n}{sigma\PYZus{}y}\PY{o}{*}\PY{n}{sigma\PYZus{}y}
+             \PY{n}{ln\PYZus{}l} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{p\PYZus{}b}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{sigma\PYZus{}y}\PY{o}{*}\PY{n}{sigma\PYZus{}y}\PY{p}{)}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{p}{(}\PY{p}{(}\PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{model}\PY{p}{)}\PY{o}{/}\PY{n}{sigma\PYZus{}y}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{+} 
+                             \PY{p}{(}\PY{n}{p\PYZus{}b}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{p}{(}\PY{n}{bad\PYZus{}noise}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{p}{(}\PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}b}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{/}\PY{p}{(}\PY{n}{bad\PYZus{}noise}\PY{p}{)}\PY{p}{)}
+                                   \PY{p}{)}
+                           \PY{p}{)}
+             \PY{k}{return} \PY{n}{ln\PYZus{}l}
+         
+         \PY{k}{def} \PY{n+nf}{lnprior}\PY{p}{(}\PY{n}{theta}\PY{p}{)}\PY{p}{:}
+             \PY{n}{m}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{p\PYZus{}b}\PY{p}{,} \PY{n}{lnv\PYZus{}b}\PY{p}{,} \PY{n}{y\PYZus{}b} \PY{o}{=} \PY{n}{theta}
+             \PY{k}{if} \PY{l+m+mi}{0} \PY{o}{\PYZlt{}} \PY{n}{m} \PY{o}{\PYZlt{}} \PY{l+m+mi}{10} \PY{o+ow}{and} \PY{o}{\PYZhy{}}\PY{l+m+mi}{200} \PY{o}{\PYZlt{}} \PY{n}{b} \PY{o}{\PYZlt{}} \PY{l+m+mi}{200} \PY{o+ow}{and} \PY{l+m+mi}{0} \PY{o}{\PYZlt{}} \PY{n}{p\PYZus{}b} \PY{o}{\PYZlt{}} \PY{l+m+mf}{1.0} \PY{o+ow}{and} \PY{l+m+mi}{0} \PY{o}{\PYZlt{}} \PY{n}{lnv\PYZus{}b} \PY{o}{\PYZlt{}} \PY{l+m+mi}{20} \PY{o+ow}{and} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1000} \PY{o}{\PYZlt{}} \PY{n}{y\PYZus{}b} \PY{o}{\PYZlt{}} \PY{l+m+mi}{1000}\PY{p}{:}
+                 \PY{k}{return} \PY{l+m+mf}{0.0}
+             \PY{k}{return} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{inf}
+         
+         \PY{k}{def} \PY{n+nf}{lnprob}\PY{p}{(}\PY{n}{theta}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{yerr}\PY{p}{)}\PY{p}{:}
+             \PY{n}{lp} \PY{o}{=} \PY{n}{lnprior}\PY{p}{(}\PY{n}{theta}\PY{p}{)}
+             \PY{k}{if} \PY{o+ow}{not} \PY{n}{np}\PY{o}{.}\PY{n}{isfinite}\PY{p}{(}\PY{n}{lp}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{return} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{inf}
+             \PY{k}{return} \PY{n}{lp} \PY{o}{+} \PY{n}{lnlike}\PY{p}{(}\PY{n}{theta}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{yerr}\PY{p}{)}
+         
+         \PY{n}{ndim}\PY{p}{,} \PY{n}{nwalkers} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{100}
+         \PY{n}{pos} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mf}{2.24}\PY{p}{,} \PY{l+m+mi}{34}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{l+m+mf}{1e\PYZhy{}4}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{n}{ndim}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nwalkers}\PY{p}{)}\PY{p}{]}
+         
+         \PY{k+kn}{import} \PY{n+nn}{emcee}
+         \PY{n}{sampler} \PY{o}{=} \PY{n}{emcee}\PY{o}{.}\PY{n}{EnsembleSampler}\PY{p}{(}\PY{n}{nwalkers}\PY{p}{,} \PY{n}{ndim}\PY{p}{,} \PY{n}{lnprob}\PY{p}{,} \PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{sigma\PYZus{}y}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{sampler}\PY{o}{.}\PY{n}{run\PYZus{}mcmc}\PY{p}{(}\PY{n}{pos}\PY{p}{,} \PY{l+m+mi}{5000}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} (array([[  2.22346991e+00,   4.19415603e+01,   3.72652269e-01,
+                    9.83645567e+00,   3.66357015e+02],
+                 [  2.10917698e+00,   5.86018768e+01,   5.09449925e-01,
+                    6.43714230e+00,   4.54297235e+02],
+                 [  2.20777556e+00,   5.25886833e+01,   2.97382667e-01,
+                    8.41270991e+00,   3.94131221e+02],
+                 [  2.12493976e+00,   5.80845237e+01,   2.47014777e-01,
+                    8.83750486e+00,   3.87186794e+02],
+                 [  2.22760305e+00,   3.19472000e+01,   4.36775709e-01,
+                    8.27652281e+00,   4.79916694e+02],
+                 [  2.11059378e+00,   6.23914010e+01,   1.91688062e-01,
+                    8.40043522e+00,   4.15537651e+02],
+                 [  2.28332618e+00,   2.57292544e+01,   1.72927536e-01,
+                    8.72841504e+00,   4.66895263e+02],
+                 [  2.11001409e+00,   5.86438140e+01,   9.72277038e-02,
+                    1.13782501e+01,   7.41547877e+02],
+                 [  2.17672771e+00,   4.45283762e+01,   2.55660833e-01,
+                    8.20109370e+00,   4.96890098e+02],
+                 [  2.10960896e+00,   6.12953370e+01,   1.10840387e-01,
+                    1.08319054e+01,   4.55962728e+02],
+                 [  2.26824750e+00,   2.63216552e+01,   3.41000828e-01,
+                    1.02204974e+01,   3.99798173e+02],
+                 [  2.19115655e+00,   3.93548528e+01,   1.46908339e-01,
+                    1.12776646e+01,   4.33487149e+02],
+                 [  2.42911362e+00,   6.36867035e+00,   2.51003160e-01,
+                    1.05309686e+01,   5.04096790e+02],
+                 [  1.94013350e+00,   8.84992777e+01,   5.04363704e-02,
+                    7.32792096e+00,   4.13355485e+02],
+                 [  2.33890855e+00,   1.85020392e+01,   1.85024928e-01,
+                    9.06180543e+00,   5.62881740e+02],
+                 [  2.18918131e+00,   4.21413719e+01,   2.75398604e-01,
+                    8.31657018e+00,   4.64549883e+02],
+                 [  2.31306274e+00,   2.11518711e+01,   3.22161284e-01,
+                    1.02571904e+01,   3.94995653e+02],
+                 [  2.05451915e+00,   6.30220840e+01,   5.99289978e-01,
+                    8.97025678e+00,   4.43322276e+02],
+                 [  2.21301981e+00,   3.80656431e+01,   1.54934290e-01,
+                    8.55434772e+00,   4.61400267e+02],
+                 [  2.10908131e+00,   5.42919843e+01,   1.90376128e-01,
+                    1.07725025e+01,   6.53681002e+02],
+                 [  2.27157699e+00,   2.44668910e+01,   1.91886293e-01,
+                    8.55567925e+00,   4.71004885e+02],
+                 [  2.34187392e+00,   2.66861998e+01,   2.63002308e-01,
+                    8.46203192e+00,   4.05872936e+02],
+                 [  2.19434288e+00,   4.30675376e+01,   2.81501895e-01,
+                    6.56020521e+00,   4.30285879e+02],
+                 [  2.27235493e+00,   2.94184364e+01,   2.76672370e-01,
+                    8.75767109e+00,   4.95703620e+02],
+                 [  2.25153997e+00,   3.65397063e+01,   4.05789191e-01,
+                    8.74608090e+00,   4.29625480e+02],
+                 [  2.23323130e+00,   2.27110461e+01,   1.98559323e-01,
+                    9.30679860e+00,   4.56000126e+02],
+                 [  2.28276107e+00,   3.21340050e+01,   4.85287743e-01,
+                    8.35477465e+00,   4.36518579e+02],
+                 [  2.26010364e+00,   4.09553640e+01,   3.56792694e-01,
+                    1.07186901e+01,   5.59161099e+02],
+                 [  2.21138495e+00,   4.66471954e+01,   2.63789294e-01,
+                    8.38693994e+00,   4.25461889e+02],
+                 [  2.20231338e+00,   3.57236761e+01,   1.49952356e-01,
+                    8.01341572e+00,   3.97822471e+02],
+                 [  2.46656343e+00,  -1.66565678e-01,   2.57028295e-01,
+                    9.56086240e+00,   4.39894950e+02],
+                 [  2.32505787e+00,   1.35329373e+01,   2.05945383e-01,
+                    9.97447383e+00,   3.90460948e+02],
+                 [  2.19987245e+00,   4.35512492e+01,   1.31347680e-01,
+                    7.96516153e+00,   4.74785506e+02],
+                 [  2.38197248e+00,   1.46310065e+01,   7.29399664e-02,
+                    7.41562247e+00,   4.29900414e+02],
+                 [  2.17121046e+00,   5.51713353e+01,   4.68931475e-01,
+                    8.11349346e+00,   3.78611705e+02],
+                 [  2.27350678e+00,   2.80178124e+01,   2.48933939e-01,
+                    9.61775365e+00,   3.75988130e+02],
+                 [  2.36956944e+00,   6.10095069e+00,   2.36313150e-01,
+                    9.97814282e+00,   3.95398207e+02],
+                 [  2.08522868e+00,   4.87448509e+01,   2.64179119e-01,
+                    8.22708418e+00,   4.98856856e+02],
+                 [  2.25289249e+00,   3.53420067e+01,   2.05412405e-01,
+                    9.42091362e+00,   3.07394132e+02],
+                 [  2.27557906e+00,   2.15802109e+01,   4.05941485e-01,
+                    8.83832249e+00,   4.61206334e+02],
+                 [  2.18933483e+00,   4.23174445e+01,   1.58655216e-01,
+                    9.97939491e+00,   2.70639493e+02],
+                 [  2.30231407e+00,   2.92448954e+01,   2.85767628e-01,
+                    9.26815002e+00,   4.76525167e+02],
+                 [  2.44497721e+00,   9.33687225e+00,   2.72683844e-01,
+                    9.22305280e+00,   4.64206025e+02],
+                 [  2.42635605e+00,   7.75398012e+00,   4.82359480e-01,
+                    7.58900322e+00,   4.34432552e+02],
+                 [  2.21867559e+00,   3.61516511e+01,   3.30536522e-01,
+                    9.98076698e+00,   5.49535395e+02],
+                 [  2.38805792e+00,   1.35056287e+01,   1.80834472e-01,
+                    8.82195335e+00,   3.71448997e+02],
+                 [  2.27725682e+00,   2.29006375e+01,   1.54015296e-01,
+                    8.58201972e+00,   4.60893477e+02],
+                 [  2.38481906e+00,   8.37252189e+00,   1.84934028e-01,
+                    8.53673531e+00,   4.21563349e+02],
+                 [  2.41739569e+00,   1.04205989e+01,   3.40709985e-01,
+                    7.37721512e+00,   4.71077182e+02],
+                 [  2.12331215e+00,   4.45362249e+01,   2.79639302e-01,
+                    8.67345702e+00,   3.85561142e+02],
+                 [  2.31048303e+00,   2.13248319e+01,   8.11397848e-02,
+                    1.00586990e+01,   3.42741576e+02],
+                 [  2.14821816e+00,   5.07787755e+01,   2.81855250e-01,
+                    8.98318012e+00,   5.20733113e+02],
+                 [  1.94821198e+00,   6.90162530e+01,   5.18396532e-01,
+                    7.87516274e+00,   4.80401540e+02],
+                 [  2.21406866e+00,   3.75371326e+01,   1.59217022e-01,
+                    8.94176924e+00,   4.82393890e+02],
+                 [  2.40929167e+00,   4.91440838e+00,   1.65573802e-01,
+                    9.31498837e+00,   4.14534367e+02],
+                 [  2.32529955e+00,   1.98306063e+01,   2.26659512e-01,
+                    8.36840949e+00,   5.05382620e+02],
+                 [  2.45650971e+00,   1.49111275e+00,   1.63668602e-01,
+                    6.95852305e+00,   4.78708839e+02],
+                 [  2.09415905e+00,   5.22736252e+01,   3.22940111e-01,
+                    9.35955371e+00,   3.92965629e+02],
+                 [  2.46053205e+00,  -2.36100770e+00,   4.10151487e-01,
+                    8.08000541e+00,   4.52398726e+02],
+                 [  2.13974284e+00,   5.02501374e+01,   7.28208945e-02,
+                    1.03708807e+01,   3.78804792e+02],
+                 [  2.54824216e+00,  -6.47137365e+00,   5.28363161e-01,
+                    7.40363525e+00,   4.54941563e+02],
+                 [  2.13297143e+00,   5.66755260e+01,   2.12691673e-01,
+                    8.74354674e+00,   4.58658368e+02],
+                 [  2.24727532e+00,   2.84324482e+01,   2.79884794e-01,
+                    9.68314177e+00,   4.51019850e+02],
+                 [  2.41764422e+00,   1.45968049e+01,   1.40654885e-01,
+                    8.52357039e+00,   4.44843962e+02],
+                 [  2.23371849e+00,   4.35408718e+01,   1.28257200e-01,
+                    9.79916832e+00,   5.69938208e+02],
+                 [  2.17679933e+00,   4.21367863e+01,   4.12016640e-01,
+                    9.53596812e+00,   3.95631673e+02],
+                 [  2.06492622e+00,   7.47815723e+01,   2.55444722e-01,
+                    7.59893768e+00,   4.67570762e+02],
+                 [  2.26411844e+00,   4.38655007e+01,   2.16276182e-01,
+                    1.02497462e+01,   4.07236824e+02],
+                 [  2.13034858e+00,   5.42171697e+01,   2.13949179e-01,
+                    8.74232052e+00,   4.09670938e+02],
+                 [  2.20240005e+00,   4.36282189e+01,   4.47454993e-01,
+                    8.69865422e+00,   4.56513683e+02],
+                 [  2.10699324e+00,   5.22507838e+01,   4.11355180e-01,
+                    1.10634372e+01,   6.76282092e+02],
+                 [  2.21056876e+00,   4.03179004e+01,   2.66419485e-01,
+                    8.19728130e+00,   4.34120767e+02],
+                 [  2.38908893e+00,   1.09032898e+01,   2.81897282e-01,
+                    6.87130685e+00,   4.33300485e+02],
+                 [  2.18480026e+00,   5.00093995e+01,   2.44498526e-01,
+                    1.08898895e+01,   4.88975108e+02],
+                 [  2.24510607e+00,   2.98249147e+01,   3.75268366e-01,
+                    7.79788939e+00,   4.68495305e+02],
+                 [  2.13782836e+00,   6.35551115e+01,   4.86266813e-01,
+                    8.91916527e+00,   4.40572706e+02],
+                 [  2.12333524e+00,   4.53229778e+01,   2.89300446e-01,
+                    7.68771156e+00,   4.69558845e+02],
+                 [  2.16626720e+00,   4.46833894e+01,   3.30149094e-01,
+                    1.07594809e+01,   4.31198494e+02],
+                 [  2.55525505e+00,  -2.08450067e+01,   2.12335257e-01,
+                    7.12764265e+00,   4.73121325e+02],
+                 [  2.50546373e+00,  -8.42451795e+00,   3.36604844e-01,
+                    9.35790375e+00,   4.01583146e+02],
+                 [  2.24622398e+00,   3.69230684e+01,   2.30701538e-01,
+                    7.91448884e+00,   4.18742725e+02],
+                 [  2.25810919e+00,   3.89446102e+01,   1.96921334e-01,
+                    9.12556439e+00,   4.02718894e+02],
+                 [  2.15091669e+00,   4.47411732e+01,   3.11441075e-01,
+                    9.67180545e+00,   5.29632326e+02],
+                 [  2.09988928e+00,   5.02403550e+01,   2.98940723e-01,
+                    8.67069307e+00,   4.38780932e+02],
+                 [  2.35660666e+00,   2.19312814e+01,   4.47511089e-01,
+                    9.56547759e+00,   4.31086680e+02],
+                 [  2.15788958e+00,   4.65704332e+01,   1.32670769e-01,
+                    1.07316137e+01,   2.62387482e+02],
+                 [  2.42202036e+00,   8.19554320e+00,   1.60353396e-01,
+                    8.50509377e+00,   5.01380681e+02],
+                 [  2.29434499e+00,   2.31030940e+01,   1.17555744e-01,
+                    9.44210686e+00,   4.44561135e+02],
+                 [  2.18408071e+00,   4.04008039e+01,   3.77484587e-01,
+                    7.41625358e+00,   4.16472077e+02],
+                 [  2.30839056e+00,   2.30565921e+01,   1.70962095e-01,
+                    1.17990604e+01,   4.13449162e+02],
+                 [  2.34787454e+00,   2.18274674e+01,   2.29257650e-01,
+                    8.74982685e+00,   5.86665189e+02],
+                 [  2.25575997e+00,   2.87104020e+01,   3.05589298e-01,
+                    1.17959009e+01,   6.41936252e+02],
+                 [  2.30325728e+00,   3.43585476e+01,   3.30411674e-01,
+                    8.50360006e+00,   4.84974941e+02],
+                 [  2.16322893e+00,   5.23087181e+01,   3.76323921e-01,
+                    8.79535515e+00,   4.37660387e+02],
+                 [  2.02135279e+00,   5.96763980e+01,   3.55454697e-01,
+                    9.35724632e+00,   5.03325116e+02],
+                 [  2.44034933e+00,   2.04660472e+00,   3.68371831e-01,
+                    1.08852588e+01,   6.01879821e+02],
+                 [  2.31703966e+00,   1.97649122e+01,   2.36495025e-01,
+                    7.26360826e+00,   4.11917588e+02],
+                 [  2.47665846e+00,  -9.34254002e+00,   3.86125472e-01,
+                    8.54948646e+00,   4.20836368e+02],
+                 [  2.42900218e+00,   1.07613485e+01,   3.36155040e-01,
+                    1.10340792e+01,   1.52972299e+02],
+                 [  2.18243504e+00,   4.16305313e+01,   1.21561025e-01,
+                    7.43582667e+00,   4.90839138e+02]]),
+          array([-107.77774484, -111.13602614, -108.14231191, -107.12441467,
+                 -106.73615496, -107.24534935, -105.60718437, -111.67574658,
+                 -106.4202477 , -109.56281812, -107.69839825, -108.92860134,
+                 -108.7500132 , -114.24031096, -108.09387072, -105.51537215,
+                 -107.5855866 , -109.07623753, -105.68008782, -109.95124788,
+                 -105.89619427, -106.79928432, -107.6611485 , -105.84669318,
+                 -105.88701919, -108.40207262, -106.42643127, -110.31447142,
+                 -106.1318835 , -107.57367743, -107.64558329, -107.93444468,
+                 -106.55976168, -108.74183392, -109.07051801, -106.67983154,
+                 -108.24893394, -108.37091426, -108.76443916, -106.65066216,
+                 -109.46361477, -106.10059403, -107.72876735, -107.84381661,
+                 -107.79784559, -107.65967004, -106.20030812, -106.43159407,
+                 -107.94077333, -108.52113598, -108.82309347, -106.9495563 ,
+                 -109.71115052, -105.88198864, -107.12208809, -106.55444265,
+                 -109.87699568, -107.97295755, -107.45438673, -109.18015518,
+                 -111.19810869, -106.2545131 , -106.49686538, -107.89813568,
+                 -108.94097019, -107.41072992, -110.07572564, -109.61365333,
+                 -106.35033949, -106.2913785 , -112.47054943, -105.42407858,
+                 -107.41373079, -108.77594718, -106.40209456, -108.70280697,
+                 -107.35127078, -108.53684426, -111.2249783 , -108.55615919,
+                 -105.9306946 , -106.62853732, -107.59833207, -106.86973496,
+                 -107.61459449, -109.65067393, -107.56952618, -106.61678825,
+                 -107.38012687, -109.48762999, -110.61643885, -110.70801536,
+                 -107.37548994, -106.26638328, -109.17783634, -111.14125195,
+                 -107.16214674, -108.2423464 , -113.65298213, -108.33140692]),
+          ('MT19937', array([3635214977,  200845850, 1999926968, 2179257560, 3666480662,
+                  2948712913, 3128057779, 3000478299, 1639452623, 2532935345,
+                  3296033232, 1743992101, 2010360568, 2472391967, 3406856813,
+                   116363848, 4064340052, 3362168370, 1037933563, 3378150902,
+                  3085476401, 2599542729, 2685227874,  725897088, 1625433446,
+                  3377152409,  718592651, 3612475048, 1493151567, 3304458916,
+                  2626028793, 3441600138,  698588893, 3561459974, 3948807348,
+                  3109993289, 1011876869,  772539897, 2841286549,   67676535,
+                  1598668511,  522171472,  377864870, 3694754893, 1724973996,
+                   758830420, 2366132047, 2273102177, 1536086802,   15133578,
+                  3176823413, 3909857432, 4277359905, 1865125505, 2162687707,
+                  4108332191, 3112838350, 2808557791, 3229043528, 1986088194,
+                  1987256327, 2879145683, 1783518052, 2539563332, 2849009661,
+                   463671336, 2533346053, 1666789302, 4003572674, 2074857958,
+                  1715416682, 1541478582, 1771146771, 3760461496, 2057564902,
+                  4015069626, 2839616366,  409595151, 1333517008,  304257237,
+                  2997809587, 2758860646, 4060757652,  195582556, 2912892572,
+                   927914945, 4134267627, 3166105754, 2303703907, 2964436032,
+                  2879342200, 1399663129,  205790659, 2965347205, 4182938716,
+                  3871694525, 3638570285, 3034240591, 3172117322, 3565369807,
+                  2121859914, 2504390160,  390907666, 3612775305, 1173622572,
+                  1652568777, 1688404752, 3157407429, 1913974588, 2154993873,
+                  1348256460,  513380637, 3613878900, 1246074554, 3427829084,
+                  2916881624,  181901879,  328724358,    1088439,  479513767,
+                   228510654, 2960689476, 1207636776,  924064386, 4069123224,
+                  1343227684, 3832699782, 2125033892, 2573071420,  886194170,
+                  2770916006, 2345666272, 2837286909, 3766497452, 1335825182,
+                  3670528241, 1487646896, 3325028046, 1574201954, 2506452751,
+                   556616009, 4041686156, 4288330731,  930264427, 1654548651,
+                  3445304739, 1875765387, 2041069583, 1636278645, 1122141171,
+                  2553517245, 4227463948,  278365313, 2376510528, 1897148181,
+                  3323074707, 3947031162,   12345033, 1704112300, 4134458062,
+                  3592279474, 3765731883,  946105102,    5515104,  162250817,
+                  2932728159, 3226432105, 2851523836, 4176046005, 3070381300,
+                  3643953260, 3855617870, 2939302370, 2559875001, 3529740736,
+                  2635259436, 3660309383, 3254011983, 1204998681, 2608823040,
+                  2424238642, 3330758113,   44140242, 3006101279, 3282399165,
+                  3968418312, 2637836935, 1299838033,  444350443, 4005782816,
+                  2332201348, 2946493287, 2587972483, 2518726167, 2501638246,
+                  1353933729,  226685437, 3005965652,  146081221, 1394385990,
+                  1560908086, 1558413261, 3313359664, 3305953608, 4092389769,
+                   194145387, 4043220470,  832423882, 1701072891, 3648903915,
+                  4161203593, 3727621937, 1850000516, 2377852640, 1939955067,
+                  1291805701, 1080183366, 2295896131, 1539433162,  980169117,
+                  2125932798,  330501686,  998625644, 2311876214, 1974514409,
+                  3241396027,  890168896, 2083758712, 4188048965, 1765316144,
+                  3167570286, 1363094238, 3108225860, 4186431707,  176466837,
+                  2681745123, 2151210324, 1376624303, 1162500994, 1203640894,
+                  1368394910, 2996499557, 3031031378, 2898318573, 3902885368,
+                  3797771217, 2483338171, 3953200380, 1407760815, 2243483516,
+                  2210593865, 1251667871, 3781287702, 1871606214,  314704497,
+                  1548321966,  119693556, 2294804471, 3766050812, 3441711498,
+                  4243410827, 3009885753, 4182298903,  322649179, 1947299680,
+                  3919998357,  494742231, 2634725195,   72136203, 1851856440,
+                  3327694217,  806753077,  657469743, 4005003435, 3327254389,
+                   936971922, 2028967835, 3133150699,  558133495, 1976864015,
+                   229313050,  120036557, 1893666485, 3808523638, 2593843248,
+                  1746531529, 1037958383, 1437146014, 1511339308, 1990166064,
+                  2383658227, 1706039375, 1512836246, 3672748350, 2562076456,
+                   349643852, 2710498260, 4254768194, 1477079453, 2229473219,
+                   790609690,  171730432, 1616428988,  193117901, 3324951988,
+                  2408959821, 2366087305, 3699949143, 1798371078, 3585760472,
+                   872530512, 1952690892,  267417829,  871944933, 1683109297,
+                  2656196539, 3201863446, 3094046304,  865155834, 3927923495,
+                  4001393621,  857111844, 4245513345, 3012763529, 1437816787,
+                   926060979,  570803887, 4244703614, 2106822531,  322260814,
+                    72696390, 2585378330,  474955218, 2421391075, 3622834786,
+                  1735006272,  809729848,   50812257, 2553227020, 3132000511,
+                  1645810796, 2776778342, 3375223870, 4125950512, 1533022124,
+                  3186967484, 4035515739, 3377239354,  755337064,  606188073,
+                  3798102155, 4003830989, 2333585834,  124929137, 1707583709,
+                  3981252480, 2412505807,  226293691, 2363041199,    9658365,
+                   623432894, 1119993672, 2291581975,  526024187,  357008310,
+                  2302204158,  764427273,  988078110, 2603984264, 1222512700,
+                  1083910021, 2215432013, 4168649031,  669556665, 3592544251,
+                  2575891823, 1561720978, 3819041515,  684228265,  706705339,
+                  2645485078,  570647092, 1304055695, 1536573314, 2080554554,
+                   364276736, 2705670693, 2342162565, 3305750031,  694968010,
+                  2002780877, 3554228631,  855123426, 3867272558,   12974711,
+                  1883431322,   28600256, 2641805456, 1469125391, 1644327962,
+                   464481956, 4120513073,    9476307, 1099419732,  119261246,
+                  2294478823,  377247358, 2513931284, 1128647607, 2497400929,
+                  3024362181, 1996203818, 1559635223,  368879085, 1469636974,
+                  2762705519, 2274856883, 1870758845, 1970546641, 1009226069,
+                  2855508730, 1079379083, 2841289387,  937904506,  185158154,
+                   565527523, 3267887625,  406709504, 2998705315,  687430926,
+                  3369983236, 2322368242, 1407424586, 1922536454, 2654313797,
+                   857404246, 1432028090, 4060480289,  221080992, 1095439892,
+                  3933673828, 3671609817, 4223794574,  717642143, 3928534017,
+                  2127373037,  622535927, 3421677415, 3767995884,  603182687,
+                  1274049520, 3962047019, 2418635630,  561253592, 1942296466,
+                  3662164587,  798433329,  608772156,  525375806, 3641216009,
+                  3001650777, 1839217546, 3674779458, 2039500704,  934919174,
+                  3716934393,  378076292, 1024017982, 3626707145, 1529937280,
+                  3279246484, 1002402830, 2812662211,  359645141,  835765828,
+                   558343309, 2991013075, 2545956135,   59011072, 3034371758,
+                  1923541939, 2812473602,  648325951, 1272880980, 1173214152,
+                  3888612454, 1479290459,  455139673, 2592140997, 1705212447,
+                   190999802, 1163308768, 1366920104, 3207492594, 1531215336,
+                   350994648, 2192386539,  374916094,  309368157, 3048880630,
+                  2052066656, 3754402055, 2638892798, 2786844472, 3598444299,
+                  2307008208, 1008304821,  535225993,  450365725, 1495186367,
+                  3535774734, 4145780831, 1615665292, 1675067727, 1815484826,
+                  4290152492,  216806673, 1856567802,   91017108, 1023110442,
+                    37110319, 3666264406, 4107990694,  909585584, 2107092797,
+                   520224927,  707744664, 2246601856, 3132192909, 1975091792,
+                  1275851956, 1536237837, 2111320126,   13113049, 2183142163,
+                  2934880435, 4082024768, 3290156237, 3074168707,  451354313,
+                  1028592229, 3193855762, 2722953291,  430363368, 2265309954,
+                  2371872838,  150225007,  969578956, 1802304458, 4133661532,
+                  1940065204,  983324088, 1270007843, 3557046473, 2799999226,
+                   682272328, 3710172879, 1321037326, 2659928625, 4029478392,
+                  2403950487, 4249195251, 1524549285, 1897803174, 1862775233,
+                  1568068173, 1318181999,  339023738, 3755690155, 1301208597,
+                  3967490430, 1274641444, 2386466104,  656787158, 4201244738,
+                   175677422,  625624609, 1798106814, 4065477226, 2599367301,
+                  3630152895, 1955262445, 2513948163,  276506661, 1164734857,
+                  3803858436, 2451186600, 1630960468,  102415401, 3190726462,
+                  3427578716, 2467308732,  815621965, 3438719577, 2286769725,
+                  2281664642, 1944199029, 2302440087, 3796025581, 1872178588,
+                  1983808408,  403750825, 3862800145, 4188108521, 3889173975,
+                  4214113486, 1772752975, 1280822841, 3989054210, 1709642443,
+                    11728249, 4271862236, 2838495924,  537533792,  410267520,
+                  1610199433,  166966603, 4129922995,  901848776, 2501363145,
+                  4013158941, 3079441080, 3275736649, 3035277919], dtype=uint32), 151, 0, 0.0))
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{m\PYZus{}samples} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{sampler}\PY{o}{.}\PY{n}{chain}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)}
+         \PY{n}{b\PYZus{}samples} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{sampler}\PY{o}{.}\PY{n}{chain}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{fig}\PY{p}{,} \PY{p}{(}\PY{n}{ax1}\PY{p}{,} \PY{n}{ax2}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{hexbin}\PY{p}{(}\PY{n}{b\PYZus{}samples}\PY{p}{,} \PY{n}{m\PYZus{}samples}\PY{p}{,} \PY{n}{gridsize} \PY{o}{=} \PY{l+m+mi}{250}\PY{p}{,} \PY{n}{bins} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{log}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{mincnt} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{errorbar}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{sigma\PYZus{}y}\PY{p}{,} \PY{n}{fmt} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{o}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{300}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{700}\PY{p}{)}
+         
+         \PY{n}{max\PYZus{}prob} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{sampler}\PY{o}{.}\PY{n}{flatlnprobability}\PY{p}{)}
+         \PY{n}{m\PYZus{}max} \PY{o}{=} \PY{n}{sampler}\PY{o}{.}\PY{n}{flatchain}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{max\PYZus{}prob}\PY{p}{]}
+         \PY{n}{b\PYZus{}max} \PY{o}{=} \PY{n}{sampler}\PY{o}{.}\PY{n}{flatchain}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{max\PYZus{}prob}\PY{p}{]}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{300}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{b\PYZus{}max} \PY{o}{+} \PY{l+m+mi}{0}\PY{o}{*}\PY{n}{m\PYZus{}max}\PY{p}{,} \PY{n}{b\PYZus{}max} \PY{o}{+} \PY{l+m+mi}{300}\PY{o}{*}\PY{n}{m\PYZus{}max}\PY{p}{]}\PY{p}{,} \PY{n}{lw} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{rand\PYZus{}draw} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{500}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{sampler}\PY{o}{.}\PY{n}{flatchain}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+             \PY{n}{m\PYZus{}draw} \PY{o}{=} \PY{n}{sampler}\PY{o}{.}\PY{n}{flatchain}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{rand\PYZus{}draw}\PY{p}{]}
+             \PY{n}{b\PYZus{}draw} \PY{o}{=} \PY{n}{sampler}\PY{o}{.}\PY{n}{flatchain}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{rand\PYZus{}draw}\PY{p}{]}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{300}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{b\PYZus{}draw} \PY{o}{+} \PY{l+m+mi}{0}\PY{o}{*}\PY{n}{m\PYZus{}draw}\PY{p}{,} \PY{n}{b\PYZus{}draw} \PY{o}{+} \PY{l+m+mi}{300}\PY{o}{*}\PY{n}{m\PYZus{}draw}\PY{p}{]}\PY{p}{,}
+                      \PY{n}{color} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0.5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.4}\PY{p}{,} \PY{n}{zorder} \PY{o}{=} \PY{l+m+mi}{12}\PY{p}{,} \PY{n}{lw} \PY{o}{=} \PY{l+m+mf}{0.7}\PY{p}{)}
+         
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{m}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<IPython.core.display.Javascript object>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} <matplotlib.text.Text at 0x115e92240>
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
